@@ -1,0 +1,7 @@
+# Validated AI Model Contract
+
+The application deliberately refuses to invent poultry diagnoses. A production model must be supplied and validated before `PoultryModelAdapter.ready` is enabled.
+
+Required evidence: species/breed/age coverage; labeled disease/healthy classes; farm/flock-level train/validation/test separation; sensitivity, specificity, PPV, NPV, F1 and AUROC where appropriate; calibration; external validation; image/audio quality rejection; model version and cryptographic hash; drift monitoring; and human/veterinary review workflow.
+
+Health alerts should state: observed signal, confidence, model/version, timestamp, evidence, and escalation guidance. Treatment or drug instructions must come from an approved veterinary protocol, not from an unvalidated model.
