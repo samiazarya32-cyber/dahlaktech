@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b6b45" />
+  <meta name="description" content="Offline-first poultry farm monitoring and records." />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/icon-192.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Smart Poultry Pro</title>
+</head>
+<body>
+<header class="topbar">
+  <div><h1>Smart Poultry Pro</h1><p class="muted">Offline-first farm command center</p></div>
+  <div class="actions">
+    <select id="language" aria-label="Language">
+      <option value="en">English</option><option value="am">አማርኛ</option><option value="ti">ትግርኛ</option><option value="sw">Kiswahili</option><option value="lg">Luganda</option>
+    </select>
+    <button id="install" class="hidden">Install App</button>
+  </div>
+</header>
+<nav class="nav">
+  <button data-view="dashboard">Dashboard</button><button data-view="monitor">Live Monitor</button><button data-view="records">Records</button><button data-view="alerts">Alerts</button>
+</nav>
+<main>
+<section id="dashboard" class="view">
+  <div class="statusbar"><span id="apiDot" class="dot off"></span><span id="apiStatus">Checking cloud API…</span><span id="offlineBadge">Offline-ready</span></div>
+  <div class="grid cards">
+    <article><small>Birds</small><strong id="birds">0</strong></article>
+    <article><small>Eggs today</small><strong id="eggs">0</strong></article>
+    <article><small>Feed today</small><strong id="feed">0.0 kg</strong></article>
+    <article><small>Active alerts</small><strong id="alertCount">0</strong></article>
+  </div>
+  <article class="panel"><h2>Latest telemetry</h2><p id="telemetry" class="muted">No local telemetry yet.</p></article>
+  <article class="panel"><h2>How it works</h2><p>Farm records are stored on this device first. The app keeps working without internet. Cloud API sync is optional and can be added later with a durable database.</p></article>
+</section>
+<section id="monitor" class="view hidden">
+  <article class="panel"><h2>Camera + microphone monitor</h2><video id="camera" autoplay playsinline muted></video><div class="actions"><button id="startMonitor">Start Monitoring</button><button id="stopMonitor">Stop</button></div><p id="monitorStatus" class="muted">Ready.</p><div id="aiResult"></div><p class="muted">The included AI adapter does not fabricate diagnoses. Add a validated poultry model before enabling disease-specific predictions.</p></article>
+</section>
+<section id="records" class="view hidden">
+  <article class="panel"><h2>Add farm record</h2>
+    <form id="recordForm" class="formgrid">
+      <label>Flock ID<input name="flock_id" value="main" required></label>
+      <label>Type<select name="record_type"><option>daily</option><option>egg</option><option>feed</option><option>mortality</option><option>weight</option><option>health</option></select></label>
+      <label>Birds<input name="birds" type="number" min="0" value="0" required></label>
+      <label>Eggs<input name="eggs" type="number" min="0" value="0" required></label>
+      <label>Feed kg<input name="feed_kg" type="number" min="0" step="0.01" value="0" required></label>
+      <label class="wide">Notes<textarea name="notes" rows="3"></textarea></label>
+      <button type="submit">Save Offline</button>
+    </form>
+  </article>
+  <article class="panel"><h2>Local records</h2><div id="recordsList"></div></article>
+</section>
+<section id="alerts" class="view hidden"><article class="panel"><h2>Alerts</h2><div id="alertsList"></div></article></section>
+</main>
+<script src="/app.js" defer></script>
+</body>
+</html>
